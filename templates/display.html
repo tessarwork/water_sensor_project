@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Sensor Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.0.0/client-dist/socket.io.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var socket = io();
+            socket.on('sensor_update', function(data) {
+                document.getElementById('sensor1').textContent = 'Sensor 1: ' + data.sensor1;
+                document.getElementById('sensor2').textContent = 'Sensor 2: ' + data.sensor2;
+                document.getElementById('sensor3').textContent = 'Sensor 3: ' + data.sensor3;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Sensor Data</h1>
+    <p id="sensor1">Sensor 1: Waiting for data...</p>
+    <p id="sensor2">Sensor 2: Waiting for data...</p>
+    <p id="sensor3">Sensor 3: Waiting for data...</p>
+</body>
+</html>
