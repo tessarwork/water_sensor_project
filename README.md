@@ -1,4 +1,5 @@
 Sensor Data Display with Flask and Socket.IO
+
 This project demonstrates a real-time sensor data display using Flask and Socket.IO. It updates sensor readings dynamically to a web page without requiring a page refresh. This is ideal for real-time monitoring systems such as environmental data monitoring, industrial systems, or any application where sensor data is read and displayed in real-time.
 
 Features
