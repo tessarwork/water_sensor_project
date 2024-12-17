@@ -1,9 +1,9 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-const char* ssid = "TessarDepok_EXT";
+const char* ssid = "TessarDepok";
 const char* password = "passwordnya123"; 
-const char* serverName = "http://Macbook-Pro-Grit.local:5000/data";
+const char* serverName = "http://192.168.1.7:5000/data";
 
 float random_float(float minValue, float maxValue){ 
   return minValue + (float)random() / (float)(RAND_MAX / (maxValue - minValue));

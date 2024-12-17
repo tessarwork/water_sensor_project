@@ -1,23 +1,114 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .sensor-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .sensor {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.2s;
+            font-size: 1.5em; /* Increase font size */
+            color: #555; /* Change text color */
+        }
+        .sensor p {
+            margin: 10px 0;
+        }
+        .sensor i {
+            font-size: 2em;
+            color: #4CAF50;
+        }
+        .waiting {
+            font-style: italic; /* Italicize the waiting text */
+            color: #999; /* Change color for waiting text */
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/socket.io@4.0.0/client-dist/socket.io.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
             var socket = io();
             socket.on('sensor_update', function(data) {
-                document.getElementById('sensor1').textContent = 'Sensor 1: ' + data.sensor1;
-                document.getElementById('sensor2').textContent = 'Sensor 2: ' + data.sensor2;
-                document.getElementById('sensor3').textContent = 'Sensor 3: ' + data.sensor3;
+                document.getElementById('sensor1').innerHTML = '<i class="fas fa-thermometer-half"></i><br>Sensor 1: ' + data.sensor1.toFixed(2) + ' °C';
+                document.getElementById('sensor2').innerHTML = '<i class="fas fa-thermometer-half"></i><br>Sensor 2: ' + data.sensor2.toFixed(2) + ' °C';
+                document.getElementById('sensor3').innerHTML = '<i class="fas fa-thermometer-half"></i><br>Sensor 3: ' + data.sensor3.toFixed(2) + ' °C';
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var socket = io();
+            var sensorTimeouts = {
+                sensor1: null,
+                sensor2: null,
+                sensor3: null
+            };
+    
+            socket.on('sensor_update', function(data) {
+                // Clear any existing timeout for the sensor
+                clearTimeout(sensorTimeouts.sensor1);
+                clearTimeout(sensorTimeouts.sensor2);
+                clearTimeout(sensorTimeouts.sensor3);
+    
+                // Update sensor values
+                document.getElementById('sensor1').innerHTML = '<i class="fas fa-thermometer-half"></i><br>Sensor 1: ' + data.sensor1.toFixed(2) + ' °C';
+                document.getElementById('sensor2').innerHTML = '<i class="fas fa-thermometer-half"></i><br>Sensor 2: ' + data.sensor2.toFixed(2) + ' °C';
+                document.getElementById('sensor3').innerHTML = '<i class="fas fa-thermometer-half"></i><br>Sensor 3: ' + data.sensor3.toFixed(2) + ' °C';
+    
+                // Set a timeout to reset the sensor value after 5 seconds (or your desired time)
+                sensorTimeouts.sensor1 = setTimeout(function() {
+                    document.getElementById('sensor1').innerHTML = '<i class="fas fa-thermometer-half"></i><br><p class="waiting">Sensor 1: Waiting for data...</p>';
+                }, 5000); // 5 seconds
+    
+                sensorTimeouts.sensor2 = setTimeout(function() {
+                    document.getElementById('sensor2').innerHTML = '<i class="fas fa-thermometer-half"></i><br><p class="waiting">Sensor 2: Waiting for data...</p>';
+                }, 5000); // 5 seconds
+    
+                sensorTimeouts.sensor3 = setTimeout(function() {
+                    document.getElementById('sensor3').innerHTML = '<i class="fas fa-thermometer-half"></i><br><p class="waiting">Sensor 3: Waiting for data...</p>';
+                }, 5000); // 5 seconds
             });
         });
     </script>
 </head>
 <body>
-    <h1>Sensor Data</h1>
-    <p id="sensor1">Sensor 1: Waiting for data...</p>
-    <p id="sensor2">Sensor 2: Waiting for data...</p>
-    <p id="sensor3">Sensor 3: Waiting for data...</p>
+    <h1>Real-Time Sensor Data</h1>
+    <div class="sensor-container">
+        <div class="sensor" id="sensor1">
+            <i class="fas fa-thermometer-half"></i>
+            <p class="waiting">Sensor 1: Waiting for data...</p>
+        </div>
+        <div class="sensor" id="sensor2">
+            <i class="fas fa-thermometer-half"></i>
+            <p class="waiting">Sensor 2: Waiting for data...</p>
+        </div>
+        <div class="sensor" id="sensor3">
+            <i class="fas fa-thermometer-half"></i>
+            <p class="waiting">Sensor 3: Waiting for data...</p>
+        </div>
+    </div>
 </body>
 </html>
