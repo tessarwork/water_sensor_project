@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      nav {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      nav li {
+        display: inline;
+        margin-left: 20px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+      }
+
+      h1 {
+        color: green;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: darkgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Create account</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h1>Create an account</h1>
+      <form action="#" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
